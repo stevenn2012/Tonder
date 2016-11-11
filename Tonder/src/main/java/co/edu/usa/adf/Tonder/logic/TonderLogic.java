@@ -11,7 +11,7 @@ public class TonderLogic {
 	}
 	
 	public double compareZodiaco(Persona persona1, Persona persona2){
-		System.out.println("hola mundo");
+		System.out.println("hola mundo lindosssss");
 		return 0;
 	}
 	
