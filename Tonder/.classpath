@@ -23,15 +23,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Steven/.m2/repository/co/edu/usa/adf/Fix-width-framework/0.0.1-SNAPSHOT/Fix-width-framework-0.0.1-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="org.eclipse.jst.component.archivename" value="Fix-width-framework-0.0.1-SNAPSHOT.jar"/>
-			<attribute name="maven.groupId" value="co.edu.usa.adf"/>
-			<attribute name="maven.artifactId" value="Fix-width-framework"/>
-			<attribute name="maven.version" value="0.0.1-SNAPSHOT"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="Lib/Fix-width-framework-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
