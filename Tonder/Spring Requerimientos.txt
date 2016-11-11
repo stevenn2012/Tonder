@@ -1,0 +1,13 @@
+Spring mvc, spring cdi
+	persistencia -> framework de ancho fijo 
+	- contruir un match.com -> Citas
+	- caso de uso -> que el usuario pueda consultar personas que podrian salir con el -> ponderacion
+	- no hay necesidad de fotos
+	- mostrar top 5 de mejores puntuaciones
+	- no bisexuales 
+		- hobbies
+		- orientacion sexual
+		- signo zodiacal
+		- color favorito
+		- intereses
+		- diferencia de edad Em >= Eh/2 +7
