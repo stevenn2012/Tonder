@@ -21,6 +21,7 @@ public class TonderLogic {
 			System.out.println("\t Porcentaje color: "+compareColor(admin.personas.getDato(0), fil.get(i)));
 			System.out.println("\t Porcentaje edad: "+compareEdad(admin.personas.getDato(0), fil.get(i)));
 			System.out.println("\t Porcentaje Hobbies: "+compareHobbies(admin.personas.getDato(0), fil.get(i)));
+			System.out.println("\t Porcentaje Zodiaco: "+compareZodiaco(admin.personas.getDato(0), fil.get(i)));
 			System.out.println();
 		}
 	}
@@ -39,8 +40,58 @@ public class TonderLogic {
 		return filtroPersonas;
 	}
 	
-	public double compareZodiaco(Persona persona1, Persona persona2){
-		return 0;
+	public double compareZodiaco(Persona persona1, Persona persona2) {
+		DatosCompatibilidad compatibilidad= new DatosCompatibilidad();
+	
+		int indice1= signoZodiacal(persona1.getFechaNacimiento());
+		int indice2= signoZodiacal(persona2.getFechaNacimiento());
+		
+		double compati=compatibilidad.getCompatibilidad(indice1-1, indice2-1);
+		double resultado= (compati*30)/80;
+		return resultado;
+	}
+
+	@SuppressWarnings("deprecation")
+	private int signoZodiacal(Date fecha1) {
+		int result=0;
+		if ((fecha1.getMonth()==2 && fecha1.getDate()>=21) || (fecha1.getMonth()==3 && fecha1.getDate()<=20)) {
+			System.out.println("Aries");
+			result=1;
+		} else if ((fecha1.getMonth()==3 && fecha1.getDate()>=21) || (fecha1.getMonth()==4 && fecha1.getDate()<=21)){
+			System.out.println("Tauro");
+			result=2;
+		}else if ((fecha1.getMonth()==4 && fecha1.getDate()>=22) || (fecha1.getMonth()==5 && fecha1.getDate()<=21)){
+			System.out.println("Geminis");
+			result=3;
+		}else if ((fecha1.getMonth()==5 && fecha1.getDate()>=22) || (fecha1.getMonth()==6 && fecha1.getDate()<=22)){
+			System.out.println("Cancer");
+			result=4;
+		}else if ((fecha1.getMonth()==6 && fecha1.getDate()>=23) || (fecha1.getMonth()==7 && fecha1.getDate()<=23)){
+			System.out.println("Leo");
+			result=5;
+		}else if ((fecha1.getMonth()==7 && fecha1.getDate()>=24) || (fecha1.getMonth()==8 && fecha1.getDate()<=23)){
+			System.out.println("Virgo");
+			result=6;
+		}else if ((fecha1.getMonth()==8 && fecha1.getDate()>=24) || (fecha1.getMonth()==9 && fecha1.getDate()<=23)){
+			System.out.println("Libra");
+			result=7;
+		}else if ((fecha1.getMonth()==9 && fecha1.getDate()>=24) || (fecha1.getMonth()==10 && fecha1.getDate()<=22)){
+			System.out.println("Escorpio");
+			result=8;
+		}else if ((fecha1.getMonth()==10 && fecha1.getDate()>=23) || (fecha1.getMonth()==11 && fecha1.getDate()<=21)){
+			System.out.println("Sagitario");
+			result=9;
+		}else if ((fecha1.getMonth()==11 && fecha1.getDate()>=22) || (fecha1.getMonth()==0 && fecha1.getDate()<=20)){
+			System.out.println("Capricornio");
+			result=10;
+		}else if ((fecha1.getMonth()==0 && fecha1.getDate()>=21) || (fecha1.getMonth()==1 && fecha1.getDate()<=18)){
+			System.out.println("Acuario");
+			result=11;
+		}else if ((fecha1.getMonth()==1 && fecha1.getDate()>=19) || (fecha1.getMonth()==2 && fecha1.getDate()<=20)){
+			System.out.println("Piscis");
+			result=12;
+		}
+		return result;
 	}
 	
 	public double compareEdad(Persona persona1, Persona persona2){
