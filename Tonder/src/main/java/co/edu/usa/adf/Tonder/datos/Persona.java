@@ -1,6 +1,7 @@
 package co.edu.usa.adf.Tonder.datos;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import co.edu.usa.adf.Fix_width_framework.FixedWidthField;
 
@@ -14,7 +15,7 @@ public class Persona {
 	@FixedWidthField(posicion=5, width=100) private String correo;
 	@FixedWidthField(posicion=6, width=1) private char sexo; //M or F
 	@FixedWidthField(posicion=7, width=1) private char orientacionSexual; //M or F
-	@FixedWidthField(posicion=8, width=11) private String fechaNacimiento;
+	@FixedWidthField(posicion=8, width=11) private Date fechaNacimiento;
 	@FixedWidthField(posicion=9, width=15) private String color;
 	@FixedWidthField(posicion=10, width=200) private String about;
 	@FixedWidthField(posicion=11, width=20) private String pais;
@@ -24,10 +25,11 @@ public class Persona {
 	private ArrayList<Hobbie> hobbies;
 	
 	public Persona() {
+		this.hobbies = new ArrayList<Hobbie>();
 	}
 
 	public Persona(int id, String nombre, String apellido, String usuario, String password, String correo, char sexo,
-			char orientacionSexual, String fechaNacimiento, String color, String about, String pais, String ciudad,
+			char orientacionSexual, Date fechaNacimiento, String color, String about, String pais, String ciudad,
 			String rutaImagen) {
 		super();
 		this.id = id;
@@ -44,6 +46,7 @@ public class Persona {
 		this.pais = pais;
 		this.ciudad = ciudad;
 		this.rutaImagen = rutaImagen;
+		this.hobbies = new ArrayList<Hobbie>();
 	}
 
 	public int getId() {
@@ -110,11 +113,11 @@ public class Persona {
 		this.orientacionSexual = orientacionSexual;
 	}
 
-	public String getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(String fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

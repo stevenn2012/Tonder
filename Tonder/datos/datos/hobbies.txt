@@ -1,0 +1,10 @@
+0        Estudiar                                          
+1        Viajar                                            
+2        Jugar video juegos                                
+3        Leer                                              
+4        Comer                                             
+5        Dormir                                            
+6        Caminar                                           
+7        Vagar                                             
+8        Tomar                                             
+9        Bailar                                            
