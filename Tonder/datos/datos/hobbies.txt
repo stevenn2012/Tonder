@@ -1,10 +1,8 @@
-0        Estudiar                                          
-1        Viajar                                            
-2        Jugar video juegos                                
-3        Leer                                              
-4        Comer                                             
-5        Dormir                                            
-6        Caminar                                           
-7        Vagar                                             
-8        Tomar                                             
-9        Bailar                                            
+0        esto                                              
+1        es                                                
+2        un                                                
+3        hobbie                                            
+4        otro                                              
+5        hobbies                                           
+6        xx                                                
+7        xxx                                               
