@@ -1,7 +1,15 @@
 package co.edu.usa.adf.Tonder.logic;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import co.edu.usa.adf.Tonder.datos.Persona;
 
@@ -17,18 +25,40 @@ public class TonderLogic {
 
 	public double compatibilidad(Persona persona) {
 		System.out.println("Welcome to Tonder");
-
+		Hashtable<Double, Persona> tabla= new Hashtable<Double, Persona>();
 		System.out.println("Filtrando...");
 		ArrayList<Persona> fil = filtro(persona);
+		double porcentaje= 0.0;
 		for (int i = 0; i < fil.size(); i++) {
-			System.out.println(fil.get(i));
+			/*System.out.println(fil.get(i));
 			System.out.println("\t Porcentaje color: " + compareColor(persona, fil.get(i)));
 			System.out.println("\t Porcentaje edad: " + compareEdad(persona, fil.get(i)));
 			System.out.println("\t Porcentaje Hobbies: " + compareHobbies(persona, fil.get(i)));
 			System.out.println("\t Porcentaje Zodiaco: " + compareZodiaco(persona, fil.get(i)));
-			System.out.println();
+			System.out.println();*/
+			porcentaje=compareColor(persona, fil.get(i))+compareEdad(persona, fil.get(i))+
+					compareHobbies(persona, fil.get(i))+compareZodiaco(persona, fil.get(i));
+			tabla.put(porcentaje, fil.get(i));
+		}
+		ArrayList<Persona> result=top5Personas(tabla);
+		for (Persona persona2 : result) {
+			System.out.println(persona2.getApellido()+" "+persona2.getNombre());
 		}
 		return 0.0;
+	}
+
+	private ArrayList<Persona> top5Personas(Hashtable<Double, Persona> tabla) {
+		ArrayList<Persona> persons= new ArrayList<Persona>();
+		Set<Double> keys= new HashSet<Double>();
+		keys=tabla.keySet();
+		List<Double> lista = new ArrayList<Double>(keys);
+		Collections.sort(lista);
+		int cont=0;
+		for (int i = lista.size()-1; cont < 5; i--) {
+			persons.add(tabla.get(lista.get(i)));
+			cont++;
+		}
+		return persons;
 	}
 
 	public ArrayList<Persona> filtro(Persona persona) {
