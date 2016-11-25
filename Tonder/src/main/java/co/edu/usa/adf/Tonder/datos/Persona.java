@@ -11,7 +11,7 @@ public class Persona {
 	@FixedWidthField(posicion=1, width=50) private String nombre;
 	@FixedWidthField(posicion=2, width=50) private String apellido;
 	@FixedWidthField(posicion=3, width=20) private String usuario;
-	@FixedWidthField(posicion=4, width=20) private String password;
+	@FixedWidthField(posicion=4, width=35) private String password;
 	@FixedWidthField(posicion=5, width=100) private String correo;
 	@FixedWidthField(posicion=6, width=1) private char sexo; //M or F
 	@FixedWidthField(posicion=7, width=1) private char orientacionSexual; //M or F

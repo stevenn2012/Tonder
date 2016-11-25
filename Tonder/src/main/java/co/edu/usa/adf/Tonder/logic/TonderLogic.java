@@ -1,15 +1,14 @@
 package co.edu.usa.adf.Tonder.logic;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import co.edu.usa.adf.Tonder.datos.Persona;
 
@@ -20,45 +19,94 @@ public class TonderLogic {
 	public TonderLogic() {
 		System.out.println("Cargando... ");
 		admin = new AdminDatos();
-
+		admin.cargarDatos();
 	}
 
-	public double compatibilidad(Persona persona) {
+	public int validarUsuario(String user, String password){
+		ArrayList<Persona> personas = admin.personas.getDatos();
+		int id=-1;
+		for (int i = 0; i < personas.size(); i++) {
+			Persona persona = personas.get(i);
+			System.out.println("Validar Usuario:::::::::::::::::::");
+			System.out.println(persona.getUsuario()+", "+user+", "+persona.getUsuario().equalsIgnoreCase(user));
+			System.out.println(persona.getPassword()+", "+EncriptacionMD5.getMD5(password)+", "+persona.getPassword().equals(EncriptacionMD5.getMD5(password)));
+			if(persona.getUsuario().equalsIgnoreCase(user) && persona.getPassword().equals(EncriptacionMD5.getMD5(password))){
+				id = persona.getId();
+			}
+		}
+		return id;
+	}
+	
+	public Persona logearPersona(int id){
+		ArrayList<Persona> personas = admin.personas.getDatos();
+		for (int i = 0; i < personas.size(); i++) {
+			Persona persona = personas.get(i);
+			if(persona.getId() == id){
+				return persona;
+			}
+		}
+		return null;
+	}
+	
+	public TreeMap<Integer, Double> compatibilidad(Persona persona) {
 		System.out.println("Welcome to Tonder");
-		Hashtable<Double, Persona> tabla= new Hashtable<Double, Persona>();
+		
+		HashMap<Integer, Double> tabla= new HashMap<Integer, Double>();
+		
 		System.out.println("Filtrando...");
 		ArrayList<Persona> fil = filtro(persona);
+		System.out.println(fil);
 		double porcentaje= 0.0;
 		for (int i = 0; i < fil.size(); i++) {
-			/*System.out.println(fil.get(i));
-			System.out.println("\t Porcentaje color: " + compareColor(persona, fil.get(i)));
-			System.out.println("\t Porcentaje edad: " + compareEdad(persona, fil.get(i)));
-			System.out.println("\t Porcentaje Hobbies: " + compareHobbies(persona, fil.get(i)));
-			System.out.println("\t Porcentaje Zodiaco: " + compareZodiaco(persona, fil.get(i)));
-			System.out.println();*/
 			porcentaje=compareColor(persona, fil.get(i))+compareEdad(persona, fil.get(i))+
 					compareHobbies(persona, fil.get(i))+compareZodiaco(persona, fil.get(i));
-			tabla.put(porcentaje, fil.get(i));
+			tabla.put(fil.get(i).getId(), porcentaje);
 		}
-		ArrayList<Persona> result=top5Personas(tabla);
-		for (Persona persona2 : result) {
-			System.out.println(persona2.getApellido()+" "+persona2.getNombre());
+		System.out.println("Filtro: "+fil);
+		System.out.println("Filtro Size: "+fil.size());
+		
+		TreeMap<Integer, Double> result = top5Personas(tabla);
+		
+		System.out.println("Result: "+result);
+		System.out.println("Result Size: "+result.size());
+		
+		TreeMap<Integer, Double> result2 = new TreeMap<Integer, Double>();
+		for (Map.Entry<Integer,Double> entry : result.entrySet()) {
+	        Double value = entry.getValue();
+	        int key = entry.getKey();
+	        if(persona.getId() != key){
+				result2.put(key, value);
+			}
 		}
-		return 0.0;
+		return result2;
 	}
 
-	private ArrayList<Persona> top5Personas(Hashtable<Double, Persona> tabla) {
-		ArrayList<Persona> persons= new ArrayList<Persona>();
-		Set<Double> keys= new HashSet<Double>();
-		keys=tabla.keySet();
-		List<Double> lista = new ArrayList<Double>(keys);
-		Collections.sort(lista);
-		int cont=0;
-		for (int i = lista.size()-1; cont < 5; i--) {
-			persons.add(tabla.get(lista.get(i)));
-			cont++;
+	public static Persona buscarPersonaPorId(int id){
+		for (int i = 0; i < admin.personas.size(); i++) {
+			if(admin.personas.getDato(i).getId() == id){
+				return admin.personas.getDato(i);
+			}
 		}
-		return persons;
+		return null;
+	}
+	
+	public TreeMap<Integer, Double> top5Personas(HashMap<Integer, Double> tabla) {
+		HashMap<Integer, Double> map = new HashMap<Integer, Double>();
+        ValueComparator bvc = new ValueComparator(map);
+        TreeMap<Integer, Double> sorted_map = new TreeMap<Integer, Double>(bvc);
+        map.putAll(tabla);
+     	sorted_map.putAll(map);
+     
+		Set<Integer> keys= new HashSet<Integer>();
+		keys=sorted_map.keySet();
+		List<Integer> lista = new ArrayList<Integer>(keys);
+		try {
+			for (int i = 5; i < lista.size(); i++) {
+				sorted_map.remove(lista.get(i));
+			}
+		} catch (Exception e) {
+		}
+		return sorted_map;
 	}
 
 	public ArrayList<Persona> filtro(Persona persona) {
@@ -94,51 +142,51 @@ public class TonderLogic {
 	private int signoZodiacal(Date fecha1) {
 		int result = 0;
 		if ((fecha1.getMonth() == 2 && fecha1.getDate() >= 21) || (fecha1.getMonth() == 3 && fecha1.getDate() <= 20)) {
-			System.out.println("Aries");
+			//System.out.println("Aries");
 			result = 1;
 		} else if ((fecha1.getMonth() == 3 && fecha1.getDate() >= 21)
 				|| (fecha1.getMonth() == 4 && fecha1.getDate() <= 21)) {
-			System.out.println("Tauro");
+			//System.out.println("Tauro");
 			result = 2;
 		} else if ((fecha1.getMonth() == 4 && fecha1.getDate() >= 22)
 				|| (fecha1.getMonth() == 5 && fecha1.getDate() <= 21)) {
-			System.out.println("Geminis");
+			//System.out.println("Geminis");
 			result = 3;
 		} else if ((fecha1.getMonth() == 5 && fecha1.getDate() >= 22)
 				|| (fecha1.getMonth() == 6 && fecha1.getDate() <= 22)) {
-			System.out.println("Cancer");
+			//System.out.println("Cancer");
 			result = 4;
 		} else if ((fecha1.getMonth() == 6 && fecha1.getDate() >= 23)
 				|| (fecha1.getMonth() == 7 && fecha1.getDate() <= 23)) {
-			System.out.println("Leo");
+			//System.out.println("Leo");
 			result = 5;
 		} else if ((fecha1.getMonth() == 7 && fecha1.getDate() >= 24)
 				|| (fecha1.getMonth() == 8 && fecha1.getDate() <= 23)) {
-			System.out.println("Virgo");
+			//System.out.println("Virgo");
 			result = 6;
 		} else if ((fecha1.getMonth() == 8 && fecha1.getDate() >= 24)
 				|| (fecha1.getMonth() == 9 && fecha1.getDate() <= 23)) {
-			System.out.println("Libra");
+			//System.out.println("Libra");
 			result = 7;
 		} else if ((fecha1.getMonth() == 9 && fecha1.getDate() >= 24)
 				|| (fecha1.getMonth() == 10 && fecha1.getDate() <= 22)) {
-			System.out.println("Escorpio");
+			//System.out.println("Escorpio");
 			result = 8;
 		} else if ((fecha1.getMonth() == 10 && fecha1.getDate() >= 23)
 				|| (fecha1.getMonth() == 11 && fecha1.getDate() <= 21)) {
-			System.out.println("Sagitario");
+			//System.out.println("Sagitario");
 			result = 9;
 		} else if ((fecha1.getMonth() == 11 && fecha1.getDate() >= 22)
 				|| (fecha1.getMonth() == 0 && fecha1.getDate() <= 20)) {
-			System.out.println("Capricornio");
+			//System.out.println("Capricornio");
 			result = 10;
 		} else if ((fecha1.getMonth() == 0 && fecha1.getDate() >= 21)
 				|| (fecha1.getMonth() == 1 && fecha1.getDate() <= 18)) {
-			System.out.println("Acuario");
+			//System.out.println("Acuario");
 			result = 11;
 		} else if ((fecha1.getMonth() == 1 && fecha1.getDate() >= 19)
 				|| (fecha1.getMonth() == 2 && fecha1.getDate() <= 20)) {
-			System.out.println("Piscis");
+			//System.out.println("Piscis");
 			result = 12;
 		}
 		return result;
@@ -162,7 +210,6 @@ public class TonderLogic {
 			else
 				return 0;
 		}
-		System.out.println("\t * Edades -> M: " + edadM + ", F: " + edadF);
 		if (edadF >= ((edadM / 2) + 7))
 			return 20;
 		else
@@ -188,4 +235,22 @@ public class TonderLogic {
 		else
 			return 0;
 	}
+}
+
+class ValueComparator implements Comparator<Integer> {
+    Map<Integer, Double> base;
+
+    public ValueComparator(Map<Integer, Double> base) {
+        this.base = base;
+    }
+
+    // Note: this comparator imposes orderings that are inconsistent with
+    // equals.
+    public int compare(Integer a, Integer b) {
+        if (base.get(a) >= base.get(b)) {
+        	return -1;
+        } else {
+        	return 1;
+        } // returning 0 would merge keys
+    }
 }

@@ -1,8 +1,6 @@
 package co.edu.usa.adf.Tonder.logic;
 
 import java.util.ArrayList;
-import java.util.Date;
-
 import co.edu.usa.adf.Fix_width_framework.FrameWidth;
 import co.edu.usa.adf.Tonder.datos.Hobbie;
 import co.edu.usa.adf.Tonder.datos.Persona;
@@ -15,9 +13,6 @@ public class AdminDatos {
 
 	public AdminDatos() {
 		initPersistence();
-
-		//savePersonaHobbies();
-		//innerPersonaHobbies();
 	}
 
 	public void cargarDatos() {
@@ -36,15 +31,11 @@ public class AdminDatos {
 			personas = new FrameWidth<Persona>("datos/descriptores/dPersona.txt");
 			personaHobbies = new FrameWidth<PersonaHobbie>("datos/descriptores/dPersonaHobbie.txt");
 			hobbies = new FrameWidth<Hobbie>("datos/descriptores/dHobbie.txt");
-			personas.leerArchivo();
-			personaHobbies.leerArchivo();
-			hobbies.leerArchivo();
 		} catch (Exception e) {
 			System.out.println("initPersistence error: " + e);
 		}
 	}
-
-	@SuppressWarnings("deprecation")
+	
 	public int savePersons(Persona persona) {
 		try {
 			persona.setPassword(EncriptacionMD5.getMD5(persona.getPassword()));
@@ -91,7 +82,7 @@ public class AdminDatos {
 		}
 	}
 
-	private void innerPersonaHobbies() {
+	public void innerPersonaHobbies() {
 		try {
 			for (int i = 0; i < personaHobbies.size(); i++) {
 				PersonaHobbie phobie = personaHobbies.getDato(i);
