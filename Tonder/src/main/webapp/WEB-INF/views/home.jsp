@@ -56,6 +56,9 @@
 								In</button>
 							<button id="in" type="button" class="btn btn-info">Login</button>
 						</div>
+						<br>
+						<br>
+						<br>
 						<div id="inicio">
 							<form:form  method="post" class="f1" action="/inicio" modelAttribute="persona">
 								<div class="form-group">
@@ -69,7 +72,7 @@
 								<input type="submit" class=" btn btn-submit" value ="Ingresar">
 							</form:form>
 						</div>
-						<div id="regis">
+						<div id="regi">
 							<form:form action="/addPerson" modelAttribute="persona"
 								method="post" class="f1">
 

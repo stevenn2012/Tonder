@@ -27,7 +27,25 @@
 .navbar-fixed-top {
 	background-color: transparent;
 }
-
+#header{
+	position: relative;
+	width: 100%;
+	min-height: auto;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	background-position: center;
+	background-image: url('../images/fondo2.png');
+	text-align: center;
+	color: #FF3A3A;
+	font-weight: bold;
+}
+@media ( min-width : 768px) {
+	#header {
+		min-height: 100%;
+	}
+}
 header {
 	position: relative;
 	width: 100%;
@@ -104,4 +122,14 @@ header .header-content .header-content-inner h1 {
 	width :800px;
 	padding: 10px 100px 10px 100px !important;
 	background-color: #607D8B !important ;
+}
+
+.inner{
+	padding-top: 180px;
+}
+.wrap-per{
+	color: #333 ;  
+	padding: 10px;
+	background-color: white !important;
+	border-radius: 10px;
 }
