@@ -17,13 +17,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap.css" />"
+<link href="<c:url value="/resources/css/materialize.css" />"
 	rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap-tokenfield.css" />"
-	rel="stylesheet">
-<link
-	href="<c:url value="/resources/css/bootstrap-formhelpers.min.css" />"
-	rel="stylesheet">
+
 <link href="<c:url value="/resources/css/form.css" />" rel="stylesheet">
 
 
@@ -31,123 +27,171 @@
 <title>Home</title>
 </head>
 <body>
-	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> Menu <i
-						class="fa fa-bars"></i>
-				</button>
-				<a class="navbar-brand " href="">Tonder</a>
-			</div>
 
 
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a class="page-scroll" href="#">Sign Up / login</a></li>
+	<nav>
+		<div class="nav-wrapper  light-blue lighten-1">
+			<div class="container">
+				<a href="#" class="brand-logo">Plataforma</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li>Bienvenido : <%=HomeController.persona.getUsuario()%></li>
+					<li><a href="/">Logout</a></li>
 				</ul>
 			</div>
-
 		</div>
 	</nav>
 
+
+
 	<div id="header">
-		<div class="container">
-			<div class="row">
-
-				<div class="header-content inner">
-
-					<div class="row">
-						<div class="col-lg-4">
-							<div class="wrap-per">
-							<h3>Persona</h3>
-							<p>Nombre : <%= HomeController.persona.getNombre() %></p>
-							<p>Apellido : <%= HomeController.persona.getApellido() %></p>
-							<p>Usuario : <%= HomeController.persona.getUsuario() %></p>
-							<p>Correo : <%= HomeController.persona.getCorreo() %></p>
-							<p>Sexo : <%= HomeController.persona.getSexo() %></p>
-							<p>Orientacion : <%= HomeController.persona.getOrientacionSexual() %></p>
-							<p>fecha de nacimiento : <%= HomeController.persona.getFechaNacimiento() %></p>
-							<p>color favorito : <%= HomeController.persona.getColor() %></p>
-							<p>about : <%= HomeController.persona.getAbout() %></p>
-							<p>Pais : <%= HomeController.persona.getPais() %></p>
-							<p>Ciudad : <%= HomeController.persona.getCiudad() %></p>
-							<label>Hobbies :</label>
-							<% for(int i = 0; i < HomeController.persona.getHobbies().size() ; i++){
-								if(i != HomeController.persona.getHobbies().size()-1 ){
-								%>
-							<label><%= HomeController.persona.getHobbies().get(i).getNombre() %> , </label>
-							<%		}else{
-								%>
-								<label><%= HomeController.persona.getHobbies().get(i).getNombre() %>  </label>
-								<%
-										}
-									}
-								%>
-							</div>
-							
-							
-						</div>
-						<div class="col-lg-8">
-						<div class ="wrap-per">
-							<%
-								TreeMap<Integer, Double> personas = HomeController.compatible;
-								Set<Integer> keys = new HashSet<Integer>();
-								keys = personas.keySet();
-								
-								List<Integer> lista = new ArrayList<Integer>(keys);
-			
-								for (int i = 0; i < lista.size(); i++) {
-									%>
-									<div class="persona">
-									<label>Porcentaje :<%= personas.get(lista.get(i)) %> , </label>
-									<label>Nombre :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getNombre() %> , </label>
-									<label>Apellido :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getUsuario() %> , </label>
-									<label>Usuario :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getUsuario() %> , </label>
-									<label>Correo :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getColor() %> , </label>
-									<label>Sexo :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getSexo() %> , </label>
-									<label>Orientacion :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getOrientacionSexual() %> , </label>
-									<label>Fecha de nacimiento :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getFechaNacimiento() %> , </label>
-									<label>Color favorito<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getColor() %> , </label>
-									<label>About :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getAbout() %> , </label>
-									<label>Pais :<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getPais() %> , </label>
-									<label>Ciudad<%= TonderLogic.buscarPersonaPorId(lista.get(i)).getCiudad() %> , </label>
-									<%
-									 for(int j = 0; j < TonderLogic.buscarPersonaPorId(lista.get(i)).getHobbies().size() ; j++){
-										 if(j != HomeController.persona.getHobbies().size()-1 ){
-									%>
-									<label><%= TonderLogic.buscarPersonaPorId(lista.get(i)).getHobbies().get(j).getNombre() %> , </label>
-									<%		}else{
-								%>
-								<label><%=  TonderLogic.buscarPersonaPorId(lista.get(i)).getHobbies().get(j).getNombre() %>  </label>
-								
-						
-									<%
-										}
-									 }
-									%>
-									</div>
-									<hr>
-									<%
-								}
-							%>
-						</div>
+		<div class="row">
+			<div class="derecha col l4">
+				<div class="container">
+					<div class="user-logo">
+						<h1>Tonder</h1>
 					</div>
+					<hr>
+					<div class="left wrap-per">
+						<div class="row">
+							<div class="col l12">
+								<div class="card light-blue lighten-1">
+									<div class="card-content white-text">
+										<span class="card-title">Soy <%=HomeController.persona.getNombre()%>
+											<%=HomeController.persona.getApellido()%></span>
+										<p>
+											Hoy soy de sexo
+											<%=HomeController.persona.getSexo()%>
+											y mi orientacion sexual es
+											<%=HomeController.persona.getOrientacionSexual()%>. Naci el
+											<%=HomeController.persona.getFechaNacimiento()%>
+											en la ciudad de
+											<%=HomeController.persona.getCiudad()%>
+											en
+											<%=HomeController.persona.getPais()%>
+											, mi color favorito es
+											<%=HomeController.persona.getColor()%>
+											,
+											<%=HomeController.persona.getAbout()%>
+											y mis hobbies son
+											<%
+											for (int i = 0; i < HomeController.persona.getHobbies().size(); i++) {
+												if (i != HomeController.persona.getHobbies().size() - 1) {
+										%>
+											<label><%=HomeController.persona.getHobbies().get(i).getNombre()%>
+												, </label>
+											<%
+												} else {
+											%>
+											<label><%=HomeController.persona.getHobbies().get(i).getNombre()%>
+											</label>
+											<%
+												}
+												}
+											%>
+										</p>
+									</div>
+									<div class="card-action">
+										<a href="#"><%=HomeController.persona.getCorreo()%></a>
+									</div>
+								</div>
+							</div>
+						</div>
 
+
+					</div>
+				</div>
+			</div>
+			<div class="personas col l8">
+
+				<div class="wrap-per">
+					<%
+						TreeMap<Integer, Double> personas = HomeController.compatible;
+						Set<Integer> keys = new HashSet<Integer>();
+						keys = personas.keySet();
+
+						List<Integer> lista = new ArrayList<Integer>(keys);
+
+						for (int i = 0; i < lista.size(); i++) {
+					%>
+					<ul class="collapsible" data-collapsible="accordion">
+						<li>
+							<div class="collapsible-header">
+								<label>Porcentaje : <%=personas.get(lista.get(i))%>
+								</label><%=TonderLogic.buscarPersonaPorId(lista.get(i)).getUsuario()%>
+							</div>
+							<div class="collapsible-body">
+								<div class="row">
+									<div class="col l4">
+										<p>
+											Nombre :<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getNombre()%>
+											<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getApellido()%>
+										</p>
+										<p>
+											Sexo :<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getSexo()%></p>
+										<p>
+											Orientacion :<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getOrientacionSexual()%></p>
+									</div>
+									<div class="col l4">
+										<p>
+											Correo :<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getCorreo()%></p>
+										<p>
+											Fecha de nacimiento :<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getFechaNacimiento()%>
+
+										</p>
+										<p>
+											Color favorito:
+											<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getColor()%>
+										</p>
+									</div>
+									<div class="col l4">
+										<p>
+											About :
+											<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getAbout()%>
+
+										</p>
+										<p>
+											Ciudad :
+											<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getCiudad()%>
+											de
+											<%=TonderLogic.buscarPersonaPorId(lista.get(i)).getPais()%>
+
+										</p>
+										<p>
+											Hobbies :
+											<%
+											for (int j = 0; j < TonderLogic.buscarPersonaPorId(lista.get(i)).getHobbies().size(); j++) {
+													if (j != HomeController.persona.getHobbies().size() - 1) {
+										%>
+											<label><%=TonderLogic.buscarPersonaPorId(lista.get(i)).getHobbies().get(j).getNombre()%>
+												, </label>
+											<%
+												} else {
+											%>
+											<label><%=TonderLogic.buscarPersonaPorId(lista.get(i)).getHobbies().get(j).getNombre()%>
+											</label>
+
+
+											<%
+												}
+													}
+											%>
+										</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<%
+						}
+					%>
 				</div>
 			</div>
 		</div>
+
 	</div>
 	<script src="<c:url value="/resources/js/jquery.js" />"></script>
-	<script src="<c:url value="/resources/js/bootstrap.js" />"></script>
+	<script src="<c:url value="/resources/js/materialize.js" />"></script>
 	<script src="<c:url value="/resources/js/script.js" />"></script>
-	<script src="<c:url value="/resources/js/bootstrap-tokenfield.js" />"></script>
-	<script
-		src="<c:url value="/resources/js/bootstrap-formhelpers.min.js" />"></script>
-	<script src="<c:url value="/resources/js/jquery.backstretch.js" />"></script>
 	<script src="<c:url value="/resources/js/form.js" />"></script>
 
 </body>

@@ -9,8 +9,7 @@
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/bootstrap.css" />"
 	rel="stylesheet">
-<link href="<c:url value="/resources/css/bootstrap-tokenfield.css" />"
-	rel="stylesheet">
+
 <link
 	href="<c:url value="/resources/css/bootstrap-formhelpers.min.css" />"
 	rel="stylesheet">

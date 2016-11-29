@@ -1,3 +1,4 @@
+
 .navbar-default {
 	background-color: transparent !important;
 	border-color: rgba(255, 255, 255, 0.5) !important;
@@ -36,7 +37,7 @@
 	background-size: cover;
 	-o-background-size: cover;
 	background-position: center;
-	background-image: url('../images/fondo2.png');
+	background: white !important; 
 	text-align: center;
 	color: #FF3A3A;
 	font-weight: bold;
@@ -125,11 +126,48 @@ header .header-content .header-content-inner h1 {
 }
 
 .inner{
-	padding-top: 180px;
+	padding-top: 50px;
 }
 .wrap-per{
 	color: #333 ;  
 	padding: 10px;
 	background-color: white !important;
 	border-radius: 10px;
+}
+.side-nav{
+	visibility: visible;
+}
+.user-logo{
+	color: #29b6f6;
+}
+.wrap-user{
+	
+}
+.derecha{
+	padding: 0 !important ;
+	border-right: gray solid 1px;
+}
+.left{
+	text-align: left;
+}
+.left h5{
+	margin: 0;
+}
+.card-content label {
+	color: white ;
+}
+.collapsible-header label {
+	font-weight: bold;
+	color:black;
+	font-size: 24px;
+	float: left;
+}
+.collapsible-body p{
+	padding: 10px !important;
+}
+.collapsible-body p label{
+	color: #333 !important;
+}
+.personas{
+	padding-top: 140px !important ;
 }

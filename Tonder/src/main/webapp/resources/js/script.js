@@ -14,5 +14,6 @@ $(document).ready(function(){
 		$(".form-box").show();
 		$("#inicio").hide();
 	});
+	 
 
 });
